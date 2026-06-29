@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>URL Extractor – Extract Internal, External and Nofollow Links</title>
+  <meta name="description" content="Extract links from a live URL or pasted HTML and text. Filter internal, external and nofollow links, view anchor text, rel and target attributes." />
+  <meta name="keywords" content="url extractor, link extractor, extract links from html, internal external links, nofollow link checker" />
+  <meta name="robots" content="index, follow" />
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root, [data-theme="light"] {
+      --font-body: 'General Sans', sans-serif;
+      --font-display: 'Cabinet Grotesk', sans-serif;
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-2: #edf2f7;
+      --panel: #f8fbff;
+      --line: #d9e2ec;
+      --text: #101828;
+      --muted: #667085;
+      --primary: #0057ff;
+      --primary-hover: #0047d1;
+      --primary-soft: #deebff;
+      --secondary: #00a3a3;
+      --secondary-soft: #dcf5f5;
+      --success: #1f8f4d;
+      --success-soft: #def4e5;
+      --warning: #c98500;
+      --warning-soft: #fff0cd;
+      --danger: #d03f62;
+      --danger-soft: #ffe2e8;
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --radius-xl: 30px;
+      --shadow-sm: 0 1px 2px rgba(15,23,42,.05);
+      --shadow-md: 0 16px 40px rgba(15,23,42,.08);
+      --shadow-lg: 0 28px 70px rgba(15,23,42,.12);
+      --container: 1340px;
+      --header-h: 78px;
+      --transition: 220ms cubic-bezier(.16,1,.3,1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0e1117;
+      --surface: #141a22;
+      --surface-2: #1b2330;
+      --panel: #111823;
+      --line: #2a3544;
+      --text: #edf2f7;
+      --muted: #98a5b3;
+      --primary: #76a5ff;
+      --primary-hover: #92b8ff;
+      --primary-soft: #1b2a47;
+      --secondary: #53c9c9;
+      --secondary-soft: #153737;
+      --success: #59cf83;
+      --success-soft: #173625;
+      --warning: #f1c461;
+      --warning-soft: #3b2f15;
+      --danger: #ef7894;
+      --danger-soft: #43202a;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.28);
+      --shadow-md: 0 16px 40px rgba(0,0,0,.36);
+      --shadow-lg: 0 28px 70px rgba(0,0,0,.46);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-body);
+      color: var(--text);
+      background: radial-gradient(circle at top right, rgba(0,87,255,.10), transparent 18%), 
+                  radial-gradient(circle at left bottom, rgba(0,163,163,.08), transparent 22%), 
+                  var(--bg);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 12px;
+      z-index: 999;
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+    }
+    .skip-link:focus { left: 12px; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--container));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 220;
+      backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--bg) 84%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      transition: transform var(--transition);
+    }
+    .site-header.hide { transform: translateY(-100%); }
+
+    .header-inner {
+      min-height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 60%, #94bbff));
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .desktop-nav a {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+      transition: color var(--transition);
+    }
+
+    .desktop-nav a:hover,
+    .desktop-nav a.active { color: var(--primary); }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn, .menu-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      background: var(--surface);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform var(--transition), border-color var(--transition);
+    }
+    .icon-btn:hover, .menu-btn:hover { transform: translateY(-2px); }
+    .menu-btn { display: none; }
+
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      z-index: 320;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition);
+    }
+    .mobile-nav.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .mobile-nav-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.48);
+    }
+    .mobile-nav-panel {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: min(88vw, 360px);
+      height: 100%;
+      background: var(--surface);
+      border-left: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      box-shadow: var(--shadow-lg);
+      padding: 22px;
+      transform: translateX(100%);
+      transition: transform var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .mobile-nav.open .mobile-nav-panel { transform: translateX(0); }
+    .mobile-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .mobile-links {
+      display: grid;
+      gap: 8px;
+    }
+    .mobile-links a {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--bg) 40%, var(--surface));
+      border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+      font-weight: 600;
+    }
+    .mobile-links a.active {
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .hero { padding: 28px 0 20px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    .hero-card, .panel-card, .metric-card, .table-card, .loader-card, .note-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      box-shadow: var(--shadow-md);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 98%, white 2%), var(--surface-2));
+    }
+    .hero-card {
+      padding: clamp(22px, 4vw, 40px);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -70px -80px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,87,255,.18), transparent 68%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--primary);
+      background: var(--primary-soft);
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+    .hero-card p { color: var(--muted); }
+    .hero-bullets {
+      margin-top: 22px;
+      display: grid;
+      gap: 12px;
+    }
+    .hero-bullets div {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+    }
+    .hero-bullets span {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      flex-shrink: 0;
+      color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .panel-card {
+      padding: 22px;
+      display: grid;
+      gap: 16px;
+      background: linear-gradient(180deg, color-mix(in srgb, var(--panel) 98%, transparent), color-mix(in srgb, var(--surface-2) 90%, transparent));
+    }
+    .panel-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2vw, 1.8rem);
+      margin-bottom: 8px;
+    }
+    .panel-head p { color: var(--muted); }
+
+    .mode-switch, .filter-row {
+      display: inline-flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .mode-switch button, .filter-chip {
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .mode-switch button.active, .filter-chip.active {
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .field-grid { display: grid; gap: 14px; }
+    .field { display: grid; gap: 8px; }
+    .field-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .hint {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+      background: color-mix(in srgb, var(--bg) 34%, var(--surface));
+      color: var(--text);
+      border-radius: 18px;
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    textarea {
+      min-height: 220px;
+      resize: vertical;
+      font-family: monospace;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 14%, transparent);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .btn {
+      min-height: 50px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 700;
+      transition: transform var(--transition);
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 72%, #7ca9ff));
+    }
+    .btn-secondary {
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+    }
+    .btn-ghost {
+      color: var(--muted);
+      background: transparent;
+      border: 1px dashed color-mix(in srgb, var(--text) 14%, transparent);
+    }
+
+    .loader-card {
+      margin-top: 22px;
+      padding: 18px;
+    }
+    .loader-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .loader-meta {
+      display: flex;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .loader-bar {
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: color-mix(in srgb, var(--text) 8%, transparent);
+      margin-bottom: 10px;
+    }
+    .loader-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--primary) 60%, #a6c7ff));
+      transition: width 240ms ease;
+    }
+    .loader-card p { color: var(--muted); font-size: 14px; }
+
+    .metrics-grid {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    .metric-card { padding: 18px; }
+    .metric-card strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.42rem;
+      margin-bottom: 6px;
+    }
+    .metric-card span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .results-grid {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 22px;
+      align-items: start;
+      scroll-margin-top: 90px;
+    }
+    .results-spotlight {
+      animation: spotlightPulse 600ms ease;
+    }
+    @keyframes spotlightPulse {
+      0% { transform: translateY(8px); opacity: 0.55; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .results-stack, .side-stack { display: grid; gap: 18px; }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 18px 20px;
+      border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+      background: color-mix(in srgb, var(--surface) 90%, transparent);
+    }
+    .card-head h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+    }
+    .card-meta {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .card-body { padding: 20px; }
+
+    .status-box {
+      border-radius: 18px;
+      padding: 14px 16px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .status-ok {
+      background: color-mix(in srgb, var(--success-soft) 80%, var(--surface));
+      color: var(--success);
+    }
+    .status-warn {
+      background: color-mix(in srgb, var(--warning-soft) 75%, var(--surface));
+      color: var(--warning);
+    }
+    .status-bad {
+      background: color-mix(in srgb, var(--danger-soft) 80%, var(--surface));
+      color: var(--danger);
+    }
+
+    .filter-row {
+      margin-bottom: 14px;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      border-radius: 20px;
+      border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+      background: color-mix(in srgb, var(--surface) 94%, transparent);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+    }
+    th {
+      color: var(--text);
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+    td { color: var(--muted); font-size: 14px; word-break: break-word; }
+    .url-cell a { color: var(--primary); font-weight: 600; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .badge.good {
+      color: var(--success);
+      background: color-mix(in srgb, var(--success-soft) 78%, var(--surface));
+    }
+    .badge.warn {
+      color: var(--warning);
+      background: color-mix(in srgb, var(--warning-soft) 78%, var(--surface));
+    }
+    .badge.bad {
+      color: var(--danger);
+      background: color-mix(in srgb, var(--danger-soft) 78%, var(--surface));
+    }
+    .badge.blue {
+      color: var(--primary);
+      background: color-mix(in srgb, var(--primary-soft) 82%, var(--surface));
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .info-box {
+      border-radius: 18px;
+      padding: 14px;
+      border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+    }
+    .info-box strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .info-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    .note-card { padding: 18px; }
+    .note-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.12rem;
+      margin-bottom: 10px;
+    }
+    .note-card p { color: var(--muted); }
+
+    .site-footer {
+      padding: 28px 0 44px;
+      color: var(--muted);
+    }
+    .footer-inner {
+      border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1024px) {
+      .desktop-nav { display: none; }
+      .menu-btn { display: grid; }
+      .hero-grid, .results-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+      .field-row-2, .info-grid { grid-template-columns: 1fr; }
+      .button-row .btn { flex: 1; }
+    }
+    @media (max-width: 480px) {
+      .metrics-grid { grid-template-columns: 1fr; }
+    }
+    body.menu-open { overflow: hidden; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#" class="brand">
+        <span class="brand-mark">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+            <path d="M4 17L10 11L14 15L20 8" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M16 8H20V12" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </span>
+        <span class="brand-name">SEO Toolkit Pro</span>
+      </a>
+      <nav class="desktop-nav">
+        <a href="/">Home</a>
+        <a href="/seo-analyzer/">SEO Analyzer</a>
+        <a href="/keyword-density-checker/">Keyword Density</a>
+        <a href="/url-extractor/" class="active">URL Extractor</a>
+        <a href="/meta-tag-generator/">Meta Generator</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" id="themeToggle" type="button">🌓</button>
+        <button class="menu-btn" id="menuToggle" type="button">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <aside class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <div class="mobile-nav-backdrop" id="mobileBackdrop"></div>
+    <div class="mobile-nav-panel">
+      <div class="mobile-top">
+        <strong>Navigation</strong>
+        <button class="icon-btn" id="menuClose" type="button">✕</button>
+      </div>
+      <nav class="mobile-links">
+        <a href="#">Home</a>
+        <a href="#">SEO Analyzer</a>
+        <a href="#">Keyword Density</a>
+        <a href="#" class="active">URL Extractor</a>
+        <a href="#">Meta Generator</a>
+      </nav>
+    </div>
+  </aside>
+
+  <main id="main-content">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-grid">
+          <article class="hero-card">
+            <span class="eyebrow">Link Intelligence</span>
+            <h1>Extract, filter and export page links in one place</h1>
+            <p>Extract all links from any webpage or HTML source. Classify internal vs external, detect nofollow attributes, and export to CSV.</p>
+            <div class="hero-bullets">
+              <div><span>01</span><div>Analyze a live page through a proxy or paste HTML/text</div></div>
+              <div><span>02</span><div>Filter by all, internal, external, or nofollow links</div></div>
+              <div><span>03</span><div>Export CSV or copy all extracted URLs</div></div>
+            </div>
+          </article>
+
+          <section class="panel-card">
+            <div class="panel-head">
+              <h2>URL Extractor</h2>
+              <p>Choose live URL mode or pasted HTML/text mode, then extract every detectable link.</p>
+            </div>
+            <div class="mode-switch">
+              <button type="button" class="active" id="modeUrlBtn">🌐 Live URL</button>
+              <button type="button" id="modeTextBtn">📝 HTML/Text</button>
+            </div>
+            <div class="field-grid">
+              <div class="field" id="urlField">
+                <label for="pageUrl">Page URL</label>
+                <input id="pageUrl" type="url" placeholder="https://example.com/page" />
+                <div class="hint">Fetches the page through a PHP proxy to bypass CORS</div>
+              </div>
+              <div class="field" id="textField" style="display:none;">
+                <label for="pageSource">HTML or raw text</label>
+                <textarea id="pageSource" placeholder="Paste HTML, markdown, or plain text with URLs..."></textarea>
+                <div class="hint">Extracts href links, markdown links, and plain-text URLs</div>
+              </div>
+              <div class="field-row-2">
+                <div class="field">
+                  <label for="baseUrl">🔗 Base URL (for relative links)</label>
+                  <input id="baseUrl" type="url" placeholder="https://example.com" />
+                  <div class="hint">Required to resolve relative URLs</div>
+                </div>
+                <div class="field">
+                  <label for="removeDuplicates">🔄 Duplicates</label>
+                  <select id="removeDuplicates">
+                    <option value="yes">Remove duplicate URLs</option>
+                    <option value="no">Keep duplicates</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="button-row">
+              <button class="btn btn-primary" id="extractBtn">🔍 Extract Links</button>
+              <button class="btn btn-secondary" id="sampleBtn">📋 Load Sample</button>
+              <button class="btn btn-secondary" id="copyBtn">📎 Copy URLs</button>
+              <button class="btn btn-secondary" id="csvBtn">📊 Export CSV</button>
+              <button class="btn btn-ghost" id="clearBtn">🗑️ Clear All</button>
+            </div>
+          </section>
+        </div>
+
+        <div class="loader-card" id="loaderCard" hidden>
+          <div class="loader-top">
+            <strong id="loaderTitle">Starting extraction</strong>
+            <div class="loader-meta">
+              <span id="loaderPercent">0%</span>
+              <span id="loaderTime">0.0s</span>
+            </div>
+          </div>
+          <div class="loader-bar">
+            <div class="loader-fill" id="loaderFill"></div>
+          </div>
+          <p id="loaderStatus">Preparing link extraction...</p>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card"><strong id="metricTotal">0</strong><span>Total links</span></div>
+          <div class="metric-card"><strong id="metricInternal">0</strong><span>Internal links</span></div>
+          <div class="metric-card"><strong id="metricExternal">0</strong><span>External links</span></div>
+          <div class="metric-card"><strong id="metricNofollow">0</strong><span>Nofollow links</span></div>
+          <div class="metric-card"><strong id="metricDomains">0</strong><span>Unique domains</span></div>
+        </div>
+
+        <div class="results-grid" id="resultsSection">
+          <div class="results-stack">
+            <section class="table-card">
+              <div class="card-head">
+                <h3>📎 Extracted Links</h3>
+                <div class="card-meta" id="resultsMeta">Waiting for extraction</div>
+              </div>
+              <div class="card-body">
+                <div class="status-box status-warn" id="statusBox">Choose a mode, enter a URL or paste HTML/text, then click Extract Links.</div>
+                <div class="filter-row">
+                  <button class="filter-chip active" data-filter="all">All</button>
+                  <button class="filter-chip" data-filter="internal">Internal</button>
+                  <button class="filter-chip" data-filter="external">External</button>
+                  <button class="filter-chip" data-filter="nofollow">Nofollow</button>
+                </div>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr><th>#</th><th>Anchor Text</th><th>URL</th><th>Type</th><th>Follow</th><th>Rel</th><th>Target</th></tr>
+                    </thead>
+                    <tbody id="resultsTableBody">
+                      <tr><td colspan="7">No extraction yet.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="side-stack">
+            <section class="table-card">
+              <div class="card-head">
+                <h3>📋 Extraction Summary</h3>
+                <div class="card-meta">Quick details</div>
+              </div>
+              <div class="card-body">
+                <div class="info-grid">
+                  <div class="info-box"><strong>Source</strong><p id="summarySource">No source yet</p></div>
+                  <div class="info-box"><strong>Duplicate handling</strong><p id="summaryDuplicates">No extraction yet</p></div>
+                  <div class="info-box"><strong>Base URL</strong><p id="summaryBase">No extraction yet</p></div>
+                  <div class="info-box"><strong>Visible filter</strong><p id="summaryFilter">All</p></div>
+                </div>
+              </div>
+            </section>
+
+            <aside class="note-card">
+              <h4>💡 What gets extracted</h4>
+              <p>href attributes from anchor tags, markdown links [text](url), and plain-text URLs like https://example.com</p>
+            </aside>
+
+            <aside class="note-card">
+              <h4>🎯 Why filters matter</h4>
+              <p>Internal/External filters help SEO teams review site architecture, outgoing references, and nofollow usage.</p>
+            </aside>
+
+            <aside class="note-card">
+              <h4>🔧 Live URL Mode</h4>
+              <p>Uses a PHP proxy to fetch HTML, bypassing CORS restrictions. Requires seo-proxy.php on your server.</p>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2026 SEO Toolkit Pro — Extract, classify, copy, and export links</p>
+      <p>🔍 Extract · 🏷️ Classify · 📊 Export</p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      // DOM Elements
+      const themeToggle = document.getElementById('themeToggle');
+      const header = document.getElementById('siteHeader');
+      const menuToggle = document.getElementById('menuToggle');
+      const menuClose = document.getElementById('menuClose');
+      const mobileNav = document.getElementById('mobileNav');
+      const mobileBackdrop = document.getElementById('mobileBackdrop');
+      const modeUrlBtn = document.getElementById('modeUrlBtn');
+      const modeTextBtn = document.getElementById('modeTextBtn');
+      const urlField = document.getElementById('urlField');
+      const textField = document.getElementById('textField');
+      const pageUrl = document.getElementById('pageUrl');
+      const pageSource = document.getElementById('pageSource');
+      const baseUrl = document.getElementById('baseUrl');
+      const removeDuplicates = document.getElementById('removeDuplicates');
+      const extractBtn = document.getElementById('extractBtn');
+      const sampleBtn = document.getElementById('sampleBtn');
+      const copyBtn = document.getElementById('copyBtn');
+      const csvBtn = document.getElementById('csvBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const loaderCard = document.getElementById('loaderCard');
+      const loaderTitle = document.getElementById('loaderTitle');
+      const loaderPercent = document.getElementById('loaderPercent');
+      const loaderTime = document.getElementById('loaderTime');
+      const loaderStatus = document.getElementById('loaderStatus');
+      const loaderFill = document.getElementById('loaderFill');
+      const metricTotal = document.getElementById('metricTotal');
+      const metricInternal = document.getElementById('metricInternal');
+      const metricExternal = document.getElementById('metricExternal');
+      const metricNofollow = document.getElementById('metricNofollow');
+      const metricDomains = document.getElementById('metricDomains');
+      const resultsMeta = document.getElementById('resultsMeta');
+      const statusBox = document.getElementById('statusBox');
+      const resultsTableBody = document.getElementById('resultsTableBody');
+      const resultsSection = document.getElementById('resultsSection');
+      const summarySource = document.getElementById('summarySource');
+      const summaryDuplicates = document.getElementById('summaryDuplicates');
+      const summaryBase = document.getElementById('summaryBase');
+      const summaryFilter = document.getElementById('summaryFilter');
+      const filterChips = document.querySelectorAll('.filter-chip');
+
+      let currentMode = 'url';
+      let currentFilter = 'all';
+      let loaderTimer = null;
+      let loaderStageTimer = null;
+      let loaderPercentTimer = null;
+      let loaderStart = 0;
+      let fakePercent = 0;
+      let allLinks = [];
+      let csvRows = [];
+
+      // Theme
+      let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      if (themeToggle) {
+        themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        themeToggle.addEventListener('click', () => {
+          const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+          themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+      }
+
+      // Mobile menu
+      if (menuToggle) menuToggle.addEventListener('click', () => {
+        mobileNav.classList.add('open');
+        document.body.classList.add('menu-open');
+      });
+      if (menuClose) menuClose.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        document.body.classList.remove('menu-open');
+      });
+      if (mobileBackdrop) mobileBackdrop.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        document.body.classList.remove('menu-open');
+      });
+
+      // Hide header on scroll
+      let lastScroll = 0;
+      window.addEventListener('scroll', () => {
+        const current = window.pageYOffset;
+        if (current > lastScroll && current > 140 && header) header.classList.add('hide');
+        else if (header) header.classList.remove('hide');
+        lastScroll = current;
+      });
+
+      // Mode switching
+      function setMode(mode) {
+        currentMode = mode;
+        const isUrl = mode === 'url';
+        modeUrlBtn.classList.toggle('active', isUrl);
+        modeTextBtn.classList.toggle('active', !isUrl);
+        urlField.style.display = isUrl ? 'grid' : 'none';
+        textField.style.display = isUrl ? 'none' : 'grid';
+      }
+      if (modeUrlBtn) modeUrlBtn.addEventListener('click', () => setMode('url'));
+      if (modeTextBtn) modeTextBtn.addEventListener('click', () => setMode('text'));
+
+      // Filter chips
+      filterChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          filterChips.forEach(btn => btn.classList.remove('active'));
+          chip.classList.add('active');
+          currentFilter = chip.dataset.filter;
+          if (summaryFilter) summaryFilter.textContent = chip.textContent;
+          renderTable();
+        });
+      });
+
+      function setStatus(type, message) {
+        statusBox.className = 'status-box';
+        if (type === 'ok') statusBox.classList.add('status-ok');
+        if (type === 'warn') statusBox.classList.add('status-warn');
+        if (type === 'bad') statusBox.classList.add('status-bad');
+        statusBox.textContent = message;
+      }
+
+      function setExtractBusy(isBusy) {
+        if (extractBtn) {
+          extractBtn.disabled = isBusy;
+          extractBtn.style.opacity = isBusy ? '0.6' : '1';
+          extractBtn.textContent = isBusy ? '⏳ Extracting...' : '🔍 Extract Links';
+        }
+      }
+
+      function scrollToResults() {
+        resultsSection.classList.remove('results-spotlight');
+        void resultsSection.offsetWidth;
+        resultsSection.classList.add('results-spotlight');
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function setLoaderPercent(value) {
+        const safe = Math.max(0, Math.min(100, value));
+        fakePercent = safe;
+        if (loaderPercent) loaderPercent.textContent = `${safe}%`;
+        if (loaderFill) loaderFill.style.width = `${safe}%`;
+      }
+
+      function startLoader() {
+        if (loaderCard) loaderCard.hidden = false;
+        if (loaderTitle) loaderTitle.textContent = 'Extracting links';
+        if (loaderStatus) loaderStatus.textContent = 'Preparing extraction...';
+        if (loaderTime) loaderTime.textContent = '0.0s';
+        setLoaderPercent(4);
+        loaderStart = Date.now();
+        
+        if (loaderTimer) clearInterval(loaderTimer);
+        if (loaderStageTimer) clearInterval(loaderStageTimer);
+        if (loaderPercentTimer) clearInterval(loaderPercentTimer);
+        
+        loaderTimer = setInterval(() => {
+          if (loaderTime) loaderTime.textContent = `${((Date.now() - loaderStart) / 1000).toFixed(1)}s`;
+        }, 100);
+        
+        const steps = [
+          { text: 'Fetching or reading source...', target: 25 },
+          { text: 'Detecting HTML and text URLs...', target: 45 },
+          { text: 'Resolving relative links...', target: 65 },
+          { text: 'Classifying link types...', target: 82 },
+          { text: 'Building exportable report...', target: 93 }
+        ];
+        
+        let stepIndex = 0;
+        if (loaderStatus) loaderStatus.textContent = steps[0].text;
+        loaderStageTimer = setInterval(() => {
+          stepIndex = Math.min(stepIndex + 1, steps.length - 1);
+          if (loaderStatus) loaderStatus.textContent = steps[stepIndex].text;
+        }, 900);
+        
+        loaderPercentTimer = setInterval(() => {
+          const target = steps[Math.min(stepIndex, steps.length - 1)].target;
+          if (fakePercent < target) setLoaderPercent(fakePercent + 1);
+        }, 80);
+        
+        scrollToResults();
+      }
+
+      function stopLoader(success = true) {
+        if (loaderTimer) clearInterval(loaderTimer);
+        if (loaderStageTimer) clearInterval(loaderStageTimer);
+        if (loaderPercentTimer) clearInterval(loaderPercentTimer);
+        
+        if (loaderTime && loaderStart) {
+          loaderTime.textContent = `${((Date.now() - loaderStart) / 1000).toFixed(1)}s`;
+        }
+        
+        if (success) {
+          if (loaderTitle) loaderTitle.textContent = '✓ Extraction complete';
+          if (loaderStatus) loaderStatus.textContent = 'Your links are ready below.';
+          setLoaderPercent(100);
+        } else {
+          if (loaderTitle) loaderTitle.textContent = '✗ Extraction failed';
+          if (loaderStatus) loaderStatus.textContent = 'The extractor could not finish the job.';
+          setLoaderPercent(100);
+        }
+        
+        setTimeout(() => {
+          if (loaderCard) loaderCard.hidden = true;
+        }, 1200);
+      }
+
+      // Fetch live HTML via proxy
+      async function fetchLiveHtml(url) {
+        try {
+          const response = await fetch(`seo-proxy.php?url=${encodeURIComponent(url)}`, {
+            method: 'GET',
+            headers: { 'Accept': 'application/json' }
+          });
+          
+          const data = await response.json();
+          
+          if (!response.ok || !data.ok) {
+            throw new Error(data.error || 'Failed to fetch the URL');
+          }
+          
+          if (!data.html) {
+            throw new Error('No HTML content returned from proxy');
+          }
+          
+          return { html: data.html, finalUrl: data.final_url || url };
+        } catch (error) {
+          throw new Error(`Fetch error: ${error.message}`);
+        }
+      }
+
+      function decodeHtml(value) {
+        if (!value) return '';
+        const txt = document.createElement('textarea');
+        txt.innerHTML = value;
+        return txt.value;
+      }
+
+      function normalizeUrlCandidate(url) {
+        if (!url) return '';
+        return url.trim().replace(/^["']|["']$/g, '').replace(/[),.;!?]+$/g, '');
+      }
+
+      function classifyLink(url, base) {
+        const href = url || '';
+        const relUrl = href.toLowerCase();
+        
+        if (relUrl.startsWith('mailto:') || relUrl.startsWith('tel:') || relUrl.startsWith('javascript:')) {
+          return { type: 'external', resolved: href };
+        }
+        
+        try {
+          const resolved = base ? new URL(href, base).href : new URL(href).href;
+          if (!base) return { type: 'external', resolved };
+          
+          const baseHost = new URL(base).hostname.replace(/^www\./, '');
+          const resolvedHost = new URL(resolved).hostname.replace(/^www\./, '');
+          return { type: baseHost === resolvedHost ? 'internal' : 'external', resolved };
+        } catch {
+          return { type: 'external', resolved: href };
+        }
+      }
+
+      function extractFromHtml(content, base) {
+        const links = [];
+        const anchorRegex = /<a\b([^>]*?)href\s*=\s*(["'])(.*?)\2([^>]*)>([\s\S]*?)<\/a>/gi;
+        let match;
+        
+        while ((match = anchorRegex.exec(content)) !== null) {
+          const before = match[1] || '';
+          const href = decodeHtml(match[3] || '').trim();
+          const after = match[4] || '';
+          const inner = match[5] || '';
+          const fullAttrs = `${before} ${after}`;
+          const anchorText = decodeHtml(inner.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()) || '(No anchor text)';
+          const rel = (fullAttrs.match(/\brel\s*=\s*(["'])(.*?)\1/i) || [])[2] || '';
+          const target = (fullAttrs.match(/\btarget\s*=\s*(["'])(.*?)\1/i) || [])[2] || '';
+          const isNofollow = /\bnofollow\b/i.test(rel);
+          
+          if (href && !href.startsWith('#')) {
+            const classified = classifyLink(href, base);
+            links.push({
+              anchorText: anchorText.substring(0, 100),
+              href: href,
+              resolvedUrl: classified.resolved,
+              type: classified.type,
+              follow: isNofollow ? 'nofollow' : 'follow',
+              rel: rel || '—',
+              target: target || '—'
+            });
+          }
+        }
+        return links;
+      }
+
+      function extractFromText(content, base) {
+        const links = [];
+        const seen = new Set();
+        
+        // Markdown links
+        const markdownRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/gi;
+        let match;
+        while ((match = markdownRegex.exec(content)) !== null) {
+          const href = normalizeUrlCandidate(match[2]);
+          if (href && !seen.has(href)) {
+            seen.add(href);
+            const classified = classifyLink(href, base);
+            links.push({
+              anchorText: (match[1].trim() || '(Markdown link)').substring(0, 100),
+              href: href,
+              resolvedUrl: classified.resolved,
+              type: classified.type,
+              follow: 'unknown',
+              rel: '—',
+              target: '—'
+            });
+          }
+        }
+        
+        // Plain text URLs
+        const textUrlRegex = /(?:https?:\/\/|www\.)[^\s<>"')]+/gi;
+        while ((match = textUrlRegex.exec(content)) !== null) {
+          let href = normalizeUrlCandidate(match[0]);
+          if (/^www\./i.test(href)) href = 'https://' + href;
+          if (href && !seen.has(href)) {
+            seen.add(href);
+            const classified = classifyLink(href, base);
+            links.push({
+              anchorText: '(Raw URL)',
+              href: href,
+              resolvedUrl: classified.resolved,
+              type: classified.type,
+              follow: 'unknown',
+              rel: '—',
+              target: '—'
+            });
+          }
+        }
+        
+        return links;
+      }
+
+      function uniqueByResolved(list) {
+        const seen = new Set();
+        return list.filter(item => {
+          const key = item.resolvedUrl || item.href;
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+      }
+
+      function buildCsvRows(rows) {
+        csvRows = [['Anchor Text', 'Original URL', 'Resolved URL', 'Type', 'Follow', 'Rel', 'Target']];
+        rows.forEach(item => {
+          csvRows.push([item.anchorText, item.href, item.resolvedUrl, item.type, item.follow, item.rel, item.target]);
+        });
+      }
+
+      function getFilteredLinks() {
+        if (currentFilter === 'internal') return allLinks.filter(item => item.type === 'internal');
+        if (currentFilter === 'external') return allLinks.filter(item => item.type === 'external');
+        if (currentFilter === 'nofollow') return allLinks.filter(item => item.follow === 'nofollow');
+        return allLinks;
+      }
+
+      function escapeHtml(text) {
+        if (!text) return '';
+        return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      }
+
+      function renderTable() {
+        if (!resultsTableBody) return;
+        const rows = getFilteredLinks();
+        
+        if (!rows.length) {
+          resultsTableBody.innerHTML = `<tr><td colspan="7">No links available for this filter.</td></tr>`;
+          return;
+        }
+        
+        resultsTableBody.innerHTML = rows.map((item, index) => {
+          const typeBadge = item.type === 'internal' ? '<span class="badge good">Internal</span>' : '<span class="badge blue">External</span>';
+          let followBadge = '<span class="badge warn">Unknown</span>';
+          if (item.follow === 'follow') followBadge = '<span class="badge good">Follow</span>';
+          if (item.follow === 'nofollow') followBadge = '<span class="badge bad">Nofollow</span>';
+          const safeUrl = escapeHtml(item.resolvedUrl || item.href);
+          
+          return `
+            <tr>
+              <td>${index + 1}</td>
+              <td>${escapeHtml(item.anchorText)}</td>
+              <td class="url-cell"><a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${safeUrl.substring(0, 80)}${safeUrl.length > 80 ? '...' : ''}</a></td>
+              <td>${typeBadge}</td>
+              <td>${followBadge}</td>
+              <td>${escapeHtml(item.rel)}</td>
+              <td>${escapeHtml(item.target)}</td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      function updateSummary(source, base) {
+        const uniqueDomains = new Set();
+        allLinks.forEach(item => {
+          try {
+            const hostname = new URL(item.resolvedUrl).hostname.replace(/^www\./, '');
+            if (hostname) uniqueDomains.add(hostname);
+          } catch (e) {}
+        });
+        
+        const internal = allLinks.filter(item => item.type === 'internal').length;
+        const external = allLinks.filter(item => item.type === 'external').length;
+        const nofollow = allLinks.filter(item => item.follow === 'nofollow').length;
+        
+        if (metricTotal) metricTotal.textContent = allLinks.length;
+        if (metricInternal) metricInternal.textContent = internal;
+        if (metricExternal) metricExternal.textContent = external;
+        if (metricNofollow) metricNofollow.textContent = nofollow;
+        if (metricDomains) metricDomains.textContent = uniqueDomains.size;
+        
+        if (summarySource) summarySource.textContent = source.length > 50 ? source.substring(0, 50) + '...' : source;
+        if (summaryDuplicates) summaryDuplicates.textContent = removeDuplicates.value === 'yes' ? 'Duplicate URLs removed' : 'Duplicate URLs kept';
+        if (summaryBase) summaryBase.textContent = base || 'Not provided';
+        
+        if (!allLinks.length) {
+          setStatus('bad', 'No links were detected in the provided input.');
+          if (resultsMeta) resultsMeta.textContent = 'No links found';
+        } else {
+          setStatus('ok', `✓ ${allLinks.length} links extracted successfully!`);
+          if (resultsMeta) resultsMeta.textContent = `${allLinks.length} links extracted`;
+        }
+      }
+
+      function copyAllLinks() {
+        if (!allLinks.length) {
+          setStatus('bad', 'No links available to copy yet.');
+          return;
+        }
+        const text = getFilteredLinks().map(item => item.resolvedUrl || item.href).join('\n');
+        navigator.clipboard.writeText(text).then(() => {
+          setStatus('ok', '✓ Visible links copied to clipboard!');
+        }).catch(() => {
+          setStatus('bad', 'Failed to copy. Select manually from the table.');
+        });
+      }
+
+      function downloadCsv() {
+        if (!csvRows.length) {
+          setStatus('bad', 'No results available to export yet.');
+          return;
+        }
+        const csv = csvRows.map(row => row.map(value => `"${String(value).replace(/"/g, '""')}"`).join(',')).join('\n');
+        const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `url-extractor-${new Date().toISOString().slice(0, 19)}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+        setStatus('ok', '✓ CSV exported successfully!');
+      }
+
+      async function runExtraction() {
+        if (resultsMeta) resultsMeta.textContent = 'Extracting...';
+        setStatus('warn', currentMode === 'url' ? '🌐 Fetching live HTML through the proxy...' : '📝 Scanning pasted input for URLs...');
+        setExtractBusy(true);
+        startLoader();
+        
+        try {
+          let source = '';
+          let sourceLabel = '';
+          let activeBase = baseUrl.value.trim();
+          
+          if (currentMode === 'url') {
+            const url = pageUrl.value.trim();
+            if (!url) throw new Error('Please enter a URL to extract links from.');
+            if (!url.startsWith('http')) throw new Error('URL must start with http:// or https://');
+            
+            const result = await fetchLiveHtml(url);
+            source = result.html;
+            sourceLabel = result.finalUrl || url;
+            if (!activeBase) activeBase = result.finalUrl || url;
+          } else {
+            source = pageSource.value.trim();
+            if (!source) throw new Error('Please paste HTML or text first.');
+            sourceLabel = 'Pasted content';
+          }
+          
+          const htmlLinks = extractFromHtml(source, activeBase);
+          const textLinks = extractFromText(source, activeBase);
+          let combined = [...htmlLinks, ...textLinks];
+          
+          if (removeDuplicates.value === 'yes') {
+            combined = uniqueByResolved(combined);
+          }
+          
+          allLinks = combined;
+          buildCsvRows(allLinks);
+          updateSummary(sourceLabel, activeBase);
+          renderTable();
+          
+          setLoaderPercent(96);
+          if (loaderStatus) loaderStatus.textContent = 'Finalizing extracted links...';
+          stopLoader(true);
+          setExtractBusy(false);
+          scrollToResults();
+          
+        } catch (error) {
+          console.error('Extraction error:', error);
+          if (resultsMeta) resultsMeta.textContent = 'Extraction failed';
+          setStatus('bad', `Error: ${error.message}`);
+          if (resultsTableBody) {
+            resultsTableBody.innerHTML = `<tr><td colspan="7">${escapeHtml(error.message)}</td></tr>`;
+          }
+          stopLoader(false);
+          setExtractBusy(false);
+          scrollToResults();
+        }
+      }
+
+      // Load sample
+      if (sampleBtn) {
+        sampleBtn.addEventListener('click', () => {
+          setMode('text');
+          if (baseUrl) baseUrl.value = 'https://example.com';
+          if (pageSource) {
+            pageSource.value = `<a href="/about">About us</a>
+<a href="https://example.com/services" rel="noopener">Services</a>
+<a href="https://partner-site.com/resource" rel="nofollow sponsored" target="_blank">Partner resource</a>
+<a href="mailto:hello@example.com">Email us</a>
+
+Useful links: https://example.com/blog/seo-guide and www.external-reference.com/checklist
+
+[Markdown docs](https://docs.example.com/getting-started)`;
+          }
+          runExtraction();
+        });
+      }
+
+      // Copy button
+      if (copyBtn) copyBtn.addEventListener('click', copyAllLinks);
+      
+      // CSV button
+      if (csvBtn) csvBtn.addEventListener('click', downloadCsv);
+      
+      // Clear button
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          if (pageUrl) pageUrl.value = '';
+          if (pageSource) pageSource.value = '';
+          if (baseUrl) baseUrl.value = '';
+          if (removeDuplicates) removeDuplicates.value = 'yes';
+          
+          allLinks = [];
+          csvRows = [];
+          
+          if (metricTotal) metricTotal.textContent = '0';
+          if (metricInternal) metricInternal.textContent = '0';
+          if (metricExternal) metricExternal.textContent = '0';
+          if (metricNofollow) metricNofollow.textContent = '0';
+          if (metricDomains) metricDomains.textContent = '0';
+          if (resultsMeta) resultsMeta.textContent = 'Cleared';
+          if (summarySource) summarySource.textContent = 'No source yet';
+          if (summaryDuplicates) summaryDuplicates.textContent = 'No extraction yet';
+          if (summaryBase) summaryBase.textContent = 'No extraction yet';
+          
+          setStatus('warn', 'Choose a mode, enter a URL or paste HTML/text, then click Extract Links.');
+          if (resultsTableBody) {
+            resultsTableBody.innerHTML = `<tr><td colspan="7">No extraction yet.</td></tr>`;
+          }
+          if (loaderCard) loaderCard.hidden = true;
+          setExtractBusy(false);
+          
+          filterChips.forEach(btn => btn.classList.remove('active'));
+          const allFilter = document.querySelector('[data-filter="all"]');
+          if (allFilter) allFilter.classList.add('active');
+          currentFilter = 'all';
+          if (summaryFilter) summaryFilter.textContent = 'All';
+        });
+      }
+      
+      // Extract button
+      if (extractBtn) extractBtn.addEventListener('click', runExtraction);
+      
+      // Initialize
+      setMode('url');
+    })();
+  </script>
+</body>
+</html>

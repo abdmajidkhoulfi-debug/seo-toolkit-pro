@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms and Conditions | SEO Toolkit Pro</title>
+  <meta name="description" content="Read the SEO Toolkit Pro terms and conditions covering website use, intellectual property, prohibited activities, limitations of liability, and user responsibilities.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Terms and Conditions | SEO Toolkit Pro">
+  <meta property="og:description" content="Read the SEO Toolkit Pro terms and conditions covering website use, intellectual property, prohibited activities, limitations of liability, and user responsibilities.">
+  <meta property="og:url" content="https://yourdomain.com/terms.html">
+  <meta property="og:image" content="https://yourdomain.com/assets/terms-cover.jpg">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet">
+  <style>
+    :root,
+    [data-theme="light"] {
+      --font-body: 'General Sans', sans-serif;
+      --font-display: 'Cabinet Grotesk', sans-serif;
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-2: #edf2f7;
+      --line: #d9e2ec;
+      --text: #101828;
+      --muted: #667085;
+      --primary: #0057ff;
+      --primary-soft: #deebff;
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --radius-xl: 30px;
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 16px 40px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 28px 70px rgba(15, 23, 42, 0.12);
+      --container: 1180px;
+      --header-h: 78px;
+      --transition: 220ms cubic-bezier(.16, 1, .3, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0e1117;
+      --surface: #141a22;
+      --surface-2: #1b2330;
+      --line: #2a3544;
+      --text: #edf2f7;
+      --muted: #98a5b3;
+      --primary: #76a5ff;
+      --primary-soft: #1b2a47;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.28);
+      --shadow-md: 0 16px 40px rgba(0, 0, 0, 0.36);
+      --shadow-lg: 0 28px 70px rgba(0, 0, 0, 0.46);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-body);
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(0, 87, 255, .10), transparent 20%),
+        radial-gradient(circle at left bottom, rgba(0, 163, 163, .08), transparent 22%),
+        var(--bg);
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; height: auto; }
+    button { font: inherit; }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 12px;
+      z-index: 999;
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+    }
+    .skip-link:focus { left: 12px; }
+
+    .container {
+      width: min(calc(100% - 24px), var(--container));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 220;
+      backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--bg) 84%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+    }
+
+    .header-inner {
+      min-height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 60%, #94bbff));
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .desktop-nav a {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+      transition: color var(--transition);
+    }
+
+    .desktop-nav a:hover,
+    .desktop-nav a.active { color: var(--primary); }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn,
+    .menu-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      background: var(--surface);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform var(--transition), border-color var(--transition);
+    }
+
+    .icon-btn:hover,
+    .menu-btn:hover {
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, var(--primary) 30%, var(--line));
+    }
+
+    .menu-btn { display: none; }
+
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      z-index: 320;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition);
+    }
+
+    .mobile-nav.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-nav-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .48);
+    }
+
+    .mobile-nav-panel {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: min(88vw, 360px);
+      height: 100%;
+      background: var(--surface);
+      border-left: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      box-shadow: var(--shadow-lg);
+      padding: 22px;
+      transform: translateX(100%);
+      transition: transform var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .mobile-nav.open .mobile-nav-panel { transform: translateX(0); }
+
+    .mobile-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mobile-links {
+      display: grid;
+      gap: 8px;
+    }
+
+    .mobile-links a {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--bg) 40%, var(--surface));
+      border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+      font-weight: 600;
+    }
+
+    .mobile-links a.active {
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .legal-hero {
+      padding: 34px 0 18px;
+    }
+
+    .hero-card,
+    .legal-card,
+    .cta-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      box-shadow: var(--shadow-md);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 98%, white 2%), var(--surface-2));
+    }
+
+    .hero-card {
+      padding: clamp(26px, 4vw, 48px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -70px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 87, 255, .18), transparent 68%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 800;
+      color: var(--primary);
+      background: var(--primary-soft);
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      line-height: .96;
+      letter-spacing: -0.05em;
+      margin-bottom: 16px;
+      max-width: 10ch;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.55rem, 2.5vw, 2.3rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      margin-bottom: 10px;
+    }
+
+    .lead,
+    .legal-card p,
+    .legal-card li,
+    .cta-card p {
+      color: var(--muted);
+    }
+
+    .hero-meta {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .meta-box {
+      padding: 18px;
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+    }
+
+    .meta-box strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+    }
+
+    .meta-box span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .legal-layout {
+      display: grid;
+      gap: 18px;
+      margin-top: 12px;
+    }
+
+    .legal-card {
+      padding: 26px;
+    }
+
+    .legal-card ul {
+      padding-left: 18px;
+      margin: 12px 0 0;
+    }
+
+    .legal-card li {
+      margin-bottom: 8px;
+    }
+
+    .cta-card {
+      margin: 22px 0 44px;
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      transition: transform var(--transition), border-color var(--transition), background var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: color-mix(in srgb, var(--surface) 96%, transparent);
+      color: var(--text);
+      border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .site-footer {
+      padding: 20px 0 44px;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 3px;
+    }
+
+    body.menu-open { overflow: hidden; }
+
+    @media (max-width: 1120px) {
+      .desktop-nav { display: none; }
+      .menu-btn { display: grid; }
+      .cta-card { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .hero-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="./index.html" class="brand" aria-label="SEO Toolkit Pro home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M4 17L10 11L14 15L20 8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M16 8H20V12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </span>
+        <span class="brand-name">SEO Toolkit Pro</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./blog/index.php">Blog</a>
+        <a href="./contact.html">Contact</a>
+        <a href="./terms.html" class="active">Terms</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79Z"></path>
+          </svg>
+        </button>
+        <button class="menu-btn" id="menuToggle" type="button" aria-label="Open mobile menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M3 6H21M3 12H21M3 18H21" stroke-linecap="round"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <aside class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <div class="mobile-nav-backdrop" id="mobileBackdrop"></div>
+    <div class="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Mobile menu">
+      <div class="mobile-top">
+        <strong>Navigation</strong>
+        <button class="icon-btn" id="menuClose" type="button" aria-label="Close mobile menu">✕</button>
+      </div>
+      <nav class="mobile-links" aria-label="Mobile navigation">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./blog/index.php">Blog</a>
+        <a href="./contact.html">Contact</a>
+        <a href="./terms.html" class="active">Terms</a>
+      </nav>
+    </div>
+  </aside>
+
+  <main id="main-content" class="container">
+    <section class="legal-hero">
+      <div class="hero-card">
+        <span class="eyebrow">Terms and Conditions</span>
+        <h1>Rules for using SEO Toolkit Pro and its content</h1>
+        <p class="lead">
+          These terms and conditions explain the rules that apply when you access or use SEO Toolkit Pro, including acceptable use, content ownership, limitations of liability, and your responsibilities as a visitor or user.
+        </p>
+
+        <div class="hero-meta">
+          <div class="meta-box">
+            <strong>Website use rules</strong>
+            <span>Terms define what users can and cannot do on the site</span>
+          </div>
+          <div class="meta-box">
+            <strong>IP protection</strong>
+            <span>Terms commonly clarify ownership of content and brand assets</span>
+          </div>
+          <div class="meta-box">
+            <strong>Liability limits</strong>
+            <span>Terms often include disclaimers, restrictions, and enforcement rights</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="legal-layout">
+      <article class="legal-card">
+        <span class="eyebrow">Acceptance</span>
+        <h2>Acceptance of these terms</h2>
+        <p>
+          By accessing or using SEO Toolkit Pro, you agree to be bound by these terms and conditions. If you do not agree with any part of these terms, you should not use the website.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Use of the site</span>
+        <h2>Permitted website use</h2>
+        <p>
+          You may access and use the website for lawful informational, educational, and business-related purposes connected to the services, tools, and content provided on the website.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Acceptable use</span>
+        <h2>Prohibited conduct</h2>
+        <p>
+          Website terms commonly define prohibited use, including scraping, tampering, unlawful use, misleading activity, and attempts to interfere with website operations. Rules of use help website owners manage misuse more clearly. [web:491][web:493][web:497]
+        </p>
+        <ul>
+          <li>Use the website for unlawful, fraudulent, abusive, or harmful purposes</li>
+          <li>Attempt to hack, disrupt, overload, reverse engineer, or interfere with the site or its tools</li>
+          <li>Scrape, copy, republish, or mass-download content without permission</li>
+          <li>Use the website in a way that violates third-party rights or applicable laws</li>
+          <li>Introduce malware, scripts, bots, spam, or malicious automation</li>
+        </ul>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Intellectual property</span>
+        <h2>Ownership of content and brand assets</h2>
+        <p>
+          Terms and conditions commonly include an intellectual property clause that states the website owner owns or controls the text, branding, tools, logos, design elements, graphics, and other protected materials on the website. [web:487][web:489][web:498]
+        </p>
+        <p>
+          Unless otherwise stated, all website content, design, branding, code, graphics, logos, tool outputs, and materials on SEO Toolkit Pro are owned by or licensed to the website owner and are protected by applicable intellectual property laws.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Limited license</span>
+        <h2>Limited permission to use the website</h2>
+        <p>
+          You are granted a limited, non-exclusive, non-transferable, revocable right to access and use the website for personal or internal business use only, subject to these terms.
+        </p>
+        <ul>
+          <li>You may view and use the content for lawful reference</li>
+          <li>You may not sell, redistribute, reproduce, or commercially exploit website content without written permission</li>
+          <li>You may not represent the content as your own</li>
+        </ul>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Tools and outputs</span>
+        <h2>Use of tools and generated outputs</h2>
+        <p>
+          Tools and generators on the website are provided for convenience and informational support. You are responsible for reviewing, testing, editing, and validating any generated output before implementing it on a live website or business project.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">No warranty</span>
+        <h2>Website availability and accuracy</h2>
+        <p>
+          Terms often include disclaimers about service availability, information accuracy, and implied warranties because websites cannot guarantee uninterrupted access or error-free operation in all cases. [web:490][web:495][web:497]
+        </p>
+        <p>
+          The website and its content are provided on an “as is” and “as available” basis without warranties of any kind, to the fullest extent permitted by applicable law.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Liability</span>
+        <h2>Limitation of liability</h2>
+        <p>
+          To the fullest extent permitted by law, SEO Toolkit Pro will not be liable for indirect, incidental, consequential, special, or business-related damages arising out of or related to your use of the website, tools, content, downloads, or linked services.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Third parties</span>
+        <h2>Third-party websites and services</h2>
+        <p>
+          The website may include links to third-party websites or services. We do not control and are not responsible for the availability, content, privacy practices, pricing, policies, or actions of third-party services.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Suspension</span>
+        <h2>Termination or restriction of access</h2>
+        <p>
+          Website terms usually reserve the right to suspend, restrict, or terminate access when a user violates the terms or misuses the website. That gives the operator clearer enforcement rights. [web:491][web:494]
+        </p>
+        <p>
+          We may suspend, restrict, or terminate access to the website at our discretion if we believe a user has violated these terms, misused the website, or created risk for the site, its systems, or other users.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Changes</span>
+        <h2>Updates to these terms</h2>
+        <p>
+          We may update these terms from time to time to reflect changes in the website, legal requirements, offered features, or business operations. Continued use of the website after updates means you accept the revised terms.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Governing law</span>
+        <h2>Applicable law and interpretation</h2>
+        <p>
+          Terms pages often identify the governing law or jurisdiction that applies to disputes or interpretation. You should replace this section with the legal jurisdiction that applies to your business. [web:490][web:496]
+        </p>
+        <p>
+          These terms shall be governed by and interpreted according to the laws applicable to your business jurisdiction, without regard to conflict-of-law principles.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Contact</span>
+        <h2>Contact information</h2>
+        <p>
+          If you have questions about these terms and conditions, you can contact the website operator using the contact information published on the website.
+        </p>
+        <ul>
+          <li>Email: hello@yourdomain.com</li>
+          <li>Website: https://yourdomain.com</li>
+        </ul>
+      </article>
+
+      <article class="cta-card">
+        <div>
+          <span class="eyebrow">Related legal pages</span>
+          <h2>Keep your legal pages consistent</h2>
+          <p>
+            Pair this terms page with a privacy policy, disclaimer, and contact page so users can understand your rules, data practices, and support channels clearly.
+          </p>
+        </div>
+
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="./privacy-policy.html">Privacy policy</a>
+          <a class="btn btn-secondary" href="./disclaimer.html">Disclaimer</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2026 SEO Toolkit Pro. SEO tools, guides and resources.</p>
+      <p>Built for clarity, trust and practical growth.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const themeToggle = document.getElementById('themeToggle');
+      const menuToggle = document.getElementById('menuToggle');
+      const menuClose = document.getElementById('menuClose');
+      const mobileNav = document.getElementById('mobileNav');
+      const mobileBackdrop = document.getElementById('mobileBackdrop');
+
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+
+      function updateThemeIcon(mode) {
+        themeToggle.innerHTML = mode === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22"></path></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79Z"></path></svg>';
+      }
+
+      updateThemeIcon(theme);
+
+      themeToggle.addEventListener('click', function () {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', theme);
+        updateThemeIcon(theme);
+      });
+
+      function openMenu() {
+        mobileNav.classList.add('open');
+        mobileNav.setAttribute('aria-hidden', 'false');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('menu-open');
+      }
+
+      function closeMenu() {
+        mobileNav.classList.remove('open');
+        mobileNav.setAttribute('aria-hidden', 'true');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+      }
+
+      menuToggle.addEventListener('click', openMenu);
+      menuClose.addEventListener('click', closeMenu);
+      mobileBackdrop.addEventListener('click', closeMenu);
+    })();
+  </script>
+</body>
+</html>

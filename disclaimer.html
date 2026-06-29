@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disclaimer | SEO Toolkit Pro</title>
+  <meta name="description" content="Read the SEO Toolkit Pro disclaimer covering general information, no professional advice, affiliate relationships, external links, and liability limitations.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Disclaimer | SEO Toolkit Pro">
+  <meta property="og:description" content="Read the SEO Toolkit Pro disclaimer covering general information, no professional advice, affiliate relationships, external links, and liability limitations.">
+  <meta property="og:url" content="https://yourdomain.com/disclaimer.html">
+  <meta property="og:image" content="https://yourdomain.com/assets/disclaimer-cover.jpg">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet">
+  <style>
+    :root,
+    [data-theme="light"] {
+      --font-body: 'General Sans', sans-serif;
+      --font-display: 'Cabinet Grotesk', sans-serif;
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-2: #edf2f7;
+      --line: #d9e2ec;
+      --text: #101828;
+      --muted: #667085;
+      --primary: #0057ff;
+      --primary-soft: #deebff;
+      --warning: #b54708;
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --radius-xl: 30px;
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 16px 40px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 28px 70px rgba(15, 23, 42, 0.12);
+      --container: 1180px;
+      --header-h: 78px;
+      --transition: 220ms cubic-bezier(.16, 1, .3, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0e1117;
+      --surface: #141a22;
+      --surface-2: #1b2330;
+      --line: #2a3544;
+      --text: #edf2f7;
+      --muted: #98a5b3;
+      --primary: #76a5ff;
+      --primary-soft: #1b2a47;
+      --warning: #ffb86b;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.28);
+      --shadow-md: 0 16px 40px rgba(0, 0, 0, 0.36);
+      --shadow-lg: 0 28px 70px rgba(0, 0, 0, 0.46);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-body);
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(0, 87, 255, .10), transparent 20%),
+        radial-gradient(circle at left bottom, rgba(0, 163, 163, .08), transparent 22%),
+        var(--bg);
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; height: auto; }
+    button { font: inherit; }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 12px;
+      z-index: 999;
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+    }
+    .skip-link:focus { left: 12px; }
+
+    .container {
+      width: min(calc(100% - 24px), var(--container));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 220;
+      backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--bg) 84%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      transition: transform var(--transition);
+    }
+
+    .header-inner {
+      min-height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 60%, #94bbff));
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .desktop-nav a {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+      transition: color var(--transition);
+    }
+
+    .desktop-nav a:hover,
+    .desktop-nav a.active { color: var(--primary); }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn,
+    .menu-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      background: var(--surface);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform var(--transition), border-color var(--transition);
+    }
+
+    .icon-btn:hover,
+    .menu-btn:hover {
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, var(--primary) 30%, var(--line));
+    }
+
+    .menu-btn { display: none; }
+
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      z-index: 320;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition);
+    }
+
+    .mobile-nav.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-nav-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .48);
+    }
+
+    .mobile-nav-panel {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: min(88vw, 360px);
+      height: 100%;
+      background: var(--surface);
+      border-left: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      box-shadow: var(--shadow-lg);
+      padding: 22px;
+      transform: translateX(100%);
+      transition: transform var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .mobile-nav.open .mobile-nav-panel { transform: translateX(0); }
+
+    .mobile-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mobile-links {
+      display: grid;
+      gap: 8px;
+    }
+
+    .mobile-links a {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--bg) 40%, var(--surface));
+      border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+      font-weight: 600;
+    }
+
+    .mobile-links a.active {
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .legal-hero {
+      padding: 34px 0 18px;
+    }
+
+    .hero-card,
+    .legal-card,
+    .notice-card,
+    .cta-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      box-shadow: var(--shadow-md);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 98%, white 2%), var(--surface-2));
+    }
+
+    .hero-card {
+      padding: clamp(26px, 4vw, 48px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -70px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 87, 255, .18), transparent 68%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 800;
+      color: var(--primary);
+      background: var(--primary-soft);
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      line-height: .96;
+      letter-spacing: -0.05em;
+      margin-bottom: 16px;
+      max-width: 10ch;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.55rem, 2.5vw, 2.3rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      margin-bottom: 10px;
+    }
+
+    .lead,
+    .legal-card p,
+    .legal-card li,
+    .notice-card p,
+    .cta-card p {
+      color: var(--muted);
+    }
+
+    .hero-meta {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .meta-box {
+      padding: 18px;
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+    }
+
+    .meta-box strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+    }
+
+    .meta-box span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .legal-layout {
+      display: grid;
+      gap: 18px;
+      margin-top: 12px;
+    }
+
+    .legal-card,
+    .notice-card {
+      padding: 26px;
+    }
+
+    .legal-card ul {
+      padding-left: 18px;
+      margin: 12px 0 0;
+    }
+
+    .legal-card li {
+      margin-bottom: 8px;
+    }
+
+    .notice-card {
+      border-color: color-mix(in srgb, var(--warning) 35%, var(--line));
+      background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 95%, white 5%), color-mix(in srgb, var(--primary-soft) 45%, var(--surface-2)));
+    }
+
+    .notice-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .cta-card {
+      margin: 22px 0 44px;
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      transition: transform var(--transition), border-color var(--transition), background var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: color-mix(in srgb, var(--surface) 96%, transparent);
+      color: var(--text);
+      border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .site-footer {
+      padding: 20px 0 44px;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 3px;
+    }
+
+    body.menu-open { overflow: hidden; }
+
+    @media (max-width: 1120px) {
+      .desktop-nav { display: none; }
+      .menu-btn { display: grid; }
+      .cta-card { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .hero-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="./index.html" class="brand" aria-label="SEO Toolkit Pro home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M4 17L10 11L14 15L20 8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M16 8H20V12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </span>
+        <span class="brand-name">SEO Toolkit Pro</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./blog/index.php">Blog</a>
+        <a href="./contact.html">Contact</a>
+        <a href="./disclaimer.html" class="active">Disclaimer</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79Z"></path>
+          </svg>
+        </button>
+        <button class="menu-btn" id="menuToggle" type="button" aria-label="Open mobile menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M3 6H21M3 12H21M3 18H21" stroke-linecap="round"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <aside class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <div class="mobile-nav-backdrop" id="mobileBackdrop"></div>
+    <div class="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Mobile menu">
+      <div class="mobile-top">
+        <strong>Navigation</strong>
+        <button class="icon-btn" id="menuClose" type="button" aria-label="Close mobile menu">✕</button>
+      </div>
+      <nav class="mobile-links" aria-label="Mobile navigation">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./blog/index.php">Blog</a>
+        <a href="./contact.html">Contact</a>
+        <a href="./disclaimer.html" class="active">Disclaimer</a>
+      </nav>
+    </div>
+  </aside>
+
+  <main id="main-content" class="container">
+    <section class="legal-hero">
+      <div class="hero-card">
+        <span class="eyebrow">Website Disclaimer</span>
+        <h1>Important information about how to use this website</h1>
+        <p class="lead">
+          This disclaimer explains the limits of the information published on SEO Toolkit Pro, how affiliate relationships may work, and what users should understand before relying on content, tools, or third-party links.
+        </p>
+
+        <div class="hero-meta">
+          <div class="meta-box">
+            <strong>General information</strong>
+            <span>Content is provided for informational and educational use</span>
+          </div>
+          <div class="meta-box">
+            <strong>Affiliate transparency</strong>
+            <span>Some links may result in compensation or referral earnings</span>
+          </div>
+          <div class="meta-box">
+            <strong>Use at your own judgment</strong>
+            <span>Readers remain responsible for decisions and actions they take</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="legal-layout">
+      <article class="notice-card">
+        <strong>Important note</strong>
+        <p>
+          If your website uses affiliate links or endorsements, disclosure should be clear and conspicuous, easy to understand, and easy to notice rather than hidden in footers or vague language. [web:455][web:461][web:462]
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">General disclaimer</span>
+        <h2>General information only</h2>
+        <p>
+          All information on SEO Toolkit Pro is published in good faith and for general informational and educational purposes only. While we aim to keep content useful and accurate, we do not make warranties about completeness, reliability, suitability, or accuracy.
+        </p>
+        <p>
+          Any action you take based on the information, tools, recommendations, or external links available on this website is taken at your own discretion and risk.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">No professional advice</span>
+        <h2>Not legal, financial, or professional advice</h2>
+        <p>
+          The content on this website should not be considered legal, financial, tax, compliance, business, or professional advice. If you need specialized guidance, you should consult a qualified professional who understands your specific situation.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Affiliate disclosure</span>
+        <h2>Affiliate links and compensation</h2>
+        <p>
+          Some pages, articles, tools, emails, or recommendations on this website may contain affiliate links. This means we may earn a commission or referral fee if you click a link or make a purchase through a qualifying link, at no additional cost to you.
+        </p>
+        <p>
+          Affiliate disclosures should use plain language and be placed where users can clearly see them, especially near affiliate content or recommendations rather than buried in a separate location. [web:455][web:458][web:459]
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Reviews and opinions</span>
+        <h2>Opinions and recommendations</h2>
+        <p>
+          Reviews, comparisons, and editorial opinions on this site reflect our judgment at the time of writing. They may change over time as products, policies, pricing, features, or market conditions change.
+        </p>
+        <p>
+          We encourage visitors to verify important details directly with the product owner, service provider, or official source before making decisions.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">External links</span>
+        <h2>Third-party websites</h2>
+        <p>
+          This website may link to third-party websites, platforms, tools, or services that are not owned or controlled by SEO Toolkit Pro. We are not responsible for the content, terms, privacy practices, availability, or reliability of third-party websites.
+        </p>
+        <p>
+          Visiting external links from this website is done at your own discretion and risk.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Tool usage</span>
+        <h2>Tool outputs and implementation</h2>
+        <p>
+          Any outputs generated by tools on this website are provided for convenience and informational support. You are responsible for reviewing, testing, validating, and implementing any generated output before using it on a live website, business, or project.
+        </p>
+        <ul>
+          <li>Always review generated code or text before publishing</li>
+          <li>Check SEO recommendations against your own site goals</li>
+          <li>Verify legal or policy-sensitive content with a qualified expert</li>
+        </ul>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Limitation of liability</span>
+        <h2>Liability limitations</h2>
+        <p>
+          SEO Toolkit Pro will not be liable for losses, damages, or business impacts arising from the use of this website, its tools, its articles, its downloadable resources, or any external services linked from it, to the maximum extent allowed by applicable law.
+        </p>
+      </article>
+
+      <article class="legal-card">
+        <span class="eyebrow">Updates</span>
+        <h2>Changes to this disclaimer</h2>
+        <p>
+          We may update this disclaimer at any time to reflect changes in our content, business model, affiliate relationships, legal requirements, or website functionality. Continued use of the website after updates means you accept the revised version.
+        </p>
+      </article>
+
+      <article class="cta-card">
+        <div>
+          <span class="eyebrow">Need another policy page</span>
+          <h2>Review the rest of the legal pages</h2>
+          <p>
+            You can also add a privacy policy, terms page, and contact page so users can better understand how the website operates and how to reach you.
+          </p>
+        </div>
+
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="./contact.html">Contact page</a>
+          <a class="btn btn-secondary" href="./privacy-policy.html">Privacy policy</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2026 SEO Toolkit Pro. SEO tools, guides and resources.</p>
+      <p>Built for clarity, trust and practical growth.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const themeToggle = document.getElementById('themeToggle');
+      const menuToggle = document.getElementById('menuToggle');
+      const menuClose = document.getElementById('menuClose');
+      const mobileNav = document.getElementById('mobileNav');
+      const mobileBackdrop = document.getElementById('mobileBackdrop');
+
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+
+      function updateThemeIcon(mode) {
+        themeToggle.innerHTML = mode === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22"></path></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79Z"></path></svg>';
+      }
+
+      updateThemeIcon(theme);
+
+      themeToggle.addEventListener('click', function () {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', theme);
+        updateThemeIcon(theme);
+      });
+
+      function openMenu() {
+        mobileNav.classList.add('open');
+        mobileNav.setAttribute('aria-hidden', 'false');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('menu-open');
+      }
+
+      function closeMenu() {
+        mobileNav.classList.remove('open');
+        mobileNav.setAttribute('aria-hidden', 'true');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+      }
+
+      menuToggle.addEventListener('click', openMenu);
+      menuClose.addEventListener('click', closeMenu);
+      mobileBackdrop.addEventListener('click', closeMenu);
+    })();
+  </script>
+</body>
+</html>
