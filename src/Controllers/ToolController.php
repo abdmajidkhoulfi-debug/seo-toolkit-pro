@@ -6,9 +6,28 @@ use App\Core\View;
 use App\Services\SEOService;
 use App\Services\InternalLinkService;
 use App\Models\Post;
+use App\Models\Setting;
 
 class ToolController
 {
+    public function index(Request $request): void
+    {
+        $appConfig = require __DIR__ . '/../../config/app.php';
+        $tools = $appConfig['tools'];
+
+        $seo = SEOService::page([
+            'title' => 'All SEO Tools - Free Online SEO Toolkit',
+            'description' => 'Explore our complete collection of free SEO tools. Meta Tag Generator, Keyword Density Checker, Schema Markup Generator, Robots.txt Generator, SEO Analyzer, and URL Extractor.',
+            'url' => Setting::get('site_url', '') . '/tools',
+        ]);
+
+        View::share('seo', $seo);
+        View::render('tools/index', [
+            'tools' => $tools,
+            'layout' => 'main',
+        ]);
+    }
+
     public function show(Request $request, array $params): void
     {
         $slug = $params['slug'] ?? '';

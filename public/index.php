@@ -104,6 +104,7 @@ $router->post('/subscribe', [\App\Controllers\HomeController::class, 'subscribe'
 
 // ----- TOOLS -----
 
+$router->get('/tools', [\App\Controllers\ToolController::class, 'index']);
 $router->get('/tools/{slug}', [\App\Controllers\ToolController::class, 'show']);
 
 // ----- BLOG -----

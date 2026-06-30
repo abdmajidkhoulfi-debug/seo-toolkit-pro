@@ -13,11 +13,11 @@
     "customDomain": [
       {
         "publicDomain": "pfsrv.com",
-        "hasSsl": false
+        "hasSsl": true
       },
       {
         "publicDomain": "www.pfsrv.com",
-        "hasSsl": false
+        "hasSsl": true
       }
     ]
   }

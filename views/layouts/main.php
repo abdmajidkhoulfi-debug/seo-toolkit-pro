@@ -70,7 +70,7 @@
 
             <nav class="desktop-nav" aria-label="Primary navigation" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
                 <a href="/" class="nav-link" style="padding:8px 14px;border-radius:8px;font-size:14px;font-weight:600;color:var(--text-muted);transition:all 200ms ease;">Home</a>
-                <a href="/tools/meta-tag-generator" class="nav-link" style="padding:8px 14px;border-radius:8px;font-size:14px;font-weight:600;color:var(--text-muted);transition:all 200ms ease;">Tools</a>
+                <a href="/tools" class="nav-link" style="padding:8px 14px;border-radius:8px;font-size:14px;font-weight:600;color:var(--text-muted);transition:all 200ms ease;">Tools</a>
                 <a href="/blog" class="nav-link" style="padding:8px 14px;border-radius:8px;font-size:14px;font-weight:600;color:var(--text-muted);transition:all 200ms ease;">Blog</a>
                 <a href="/about" class="nav-link" style="padding:8px 14px;border-radius:8px;font-size:14px;font-weight:600;color:var(--text-muted);transition:all 200ms ease;">About</a>
                 <a href="/contact" class="nav-link" style="padding:8px 14px;border-radius:8px;font-size:14px;font-weight:600;color:var(--text-muted);transition:all 200ms ease;">Contact</a>

@@ -25,6 +25,9 @@ class SitemapService
             $xml .= self::url("{$baseUrl}/{$page}", '0.7', 'monthly');
         }
 
+        // Tools index page
+        $xml .= self::url("{$baseUrl}/tools", '0.9', 'daily');
+
         // Tool pages
         foreach ($appConfig['tools'] as $tool) {
             $xml .= self::url("{$baseUrl}/tools/{$tool['slug']}", '0.9', 'weekly');
