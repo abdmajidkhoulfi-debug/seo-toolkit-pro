@@ -33,7 +33,7 @@
         <div class="card" style="text-align:center;padding:24px;">
             <div style="font-size:28px;margin-bottom:8px;">📧</div>
             <h3 style="font-size:14px;margin:0 0 4px;">Email</h3>
-            <p style="font-size:14px;color:var(--text-muted);margin:0;">contact@pfsrv.com</p>
+            <p style="font-size:14px;color:var(--text-muted);margin:0;">abdmajidkhoulfi@gmail.com</p>
         </div>
         <div class="card" style="text-align:center;padding:24px;">
             <div style="font-size:28px;margin-bottom:8px;">⏱️</div>

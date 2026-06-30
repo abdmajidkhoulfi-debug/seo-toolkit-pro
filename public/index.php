@@ -40,6 +40,33 @@ $request = new \App\Core\Request();
 // Create router
 $router = new \App\Core\Router($request);
 
+// ----- REDIRECT OLD .HTML URLs TO CLEAN URLs -----
+
+$router->get('/contact.html', function() {
+    header('Location: /contact', true, 301);
+    exit;
+});
+
+$router->get('/about.html', function() {
+    header('Location: /about', true, 301);
+    exit;
+});
+
+$router->get('/privacy-policy.html', function() {
+    header('Location: /privacy-policy', true, 301);
+    exit;
+});
+
+$router->get('/terms.html', function() {
+    header('Location: /terms', true, 301);
+    exit;
+});
+
+$router->get('/disclaimer.html', function() {
+    header('Location: /disclaimer', true, 301);
+    exit;
+});
+
 // ----- SEO ROUTES -----
 
 // Sitemaps & SEO files
