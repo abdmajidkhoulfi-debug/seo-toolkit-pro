@@ -3,7 +3,13 @@ FROM php:8.2-apache
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Install SQLite extension
+# Install system dependencies and SQLite
+RUN apt-get update && apt-get install -y \
+        libsqlite3-dev \
+        sqlite3 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install PHP SQLite extension
 RUN docker-php-ext-install pdo pdo_sqlite
 
 # Set working directory
