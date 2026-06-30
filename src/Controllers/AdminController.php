@@ -16,49 +16,58 @@ class AdminController
 {
     public function login(Request $request): void
     {
-        if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in']) {
-            View::redirect('/admin/dashboard');
-            return;
-        }
-
-        $config = require __DIR__ . '/../../config/app.php';
-        $db = Database::getInstance();
-        $hasUsers = $db->fetch("SELECT COUNT(*) as count FROM users")['count'] > 0;
-
-        if ($request->getMethod() === 'POST') {
-            $email = $request->post('email', '');
-            $password = $request->post('password', '');
-
-            if (!$hasUsers) {
-                // First-time setup
-                $name = $request->post('name', 'Admin');
-                $hash = password_hash($password, PASSWORD_DEFAULT);
-                $db->insert('users', [
-                    'email' => $email,
-                    'password_hash' => $hash,
-                    'name' => $name,
-                ]);
-                $_SESSION['admin_logged_in'] = true;
-                $_SESSION['admin_email'] = $email;
+        try {
+            if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in']) {
                 View::redirect('/admin/dashboard');
                 return;
             }
 
-            $user = $db->fetch("SELECT * FROM users WHERE email = ?", [$email]);
-            if ($user && password_verify($password, $user['password_hash'])) {
-                $_SESSION['admin_logged_in'] = true;
-                $_SESSION['admin_email'] = $email;
-                $_SESSION['admin_name'] = $user['name'];
-                $db->update('users', ['last_login' => date('Y-m-d H:i:s')], 'id = ?', [$user['id']]);
-                View::redirect('/admin/dashboard');
-                return;
-            }
+            $config = require __DIR__ . '/../../config/app.php';
+            $db = Database::getInstance();
+            $hasUsers = $db->fetch("SELECT COUNT(*) as count FROM users")['count'] > 0;
 
-            $error = 'Invalid email or password.';
+            if ($request->getMethod() === 'POST') {
+                $email = trim($request->post('email', ''));
+                $password = $request->post('password', '');
+
+                if (empty($email) || empty($password)) {
+                    throw new \Exception('Please fill in all fields.');
+                }
+
+                if (!$hasUsers) {
+                    // First-time setup
+                    $name = trim($request->post('name', 'Admin'));
+                    $hash = password_hash($password, PASSWORD_DEFAULT);
+                    $db->insert('users', [
+                        'email' => $email,
+                        'password_hash' => $hash,
+                        'name' => $name,
+                    ]);
+                    $_SESSION['admin_logged_in'] = true;
+                    $_SESSION['admin_email'] = $email;
+                    $_SESSION['admin_name'] = $name;
+                    View::redirect('/admin/dashboard');
+                    return;
+                }
+
+                $user = $db->fetch("SELECT * FROM users WHERE email = ?", [$email]);
+                if ($user && password_verify($password, $user['password_hash'])) {
+                    $_SESSION['admin_logged_in'] = true;
+                    $_SESSION['admin_email'] = $email;
+                    $_SESSION['admin_name'] = $user['name'];
+                    $db->update('users', ['last_login' => date('Y-m-d H:i:s')], 'id = ?', [$user['id']]);
+                    View::redirect('/admin/dashboard');
+                    return;
+                }
+
+                $error = 'Invalid email or password.';
+            }
+        } catch (\Exception $e) {
+            $error = $e->getMessage();
         }
 
         View::render('admin/login', [
-            'hasUsers' => $hasUsers,
+            'hasUsers' => $hasUsers ?? false,
             'error' => $error ?? null,
             '_no_layout' => true,
         ]);

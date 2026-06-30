@@ -14,6 +14,7 @@ return [
 
     'database' => [
         'path' => __DIR__ . '/../storage/database/app.sqlite',
+        'dir' => __DIR__ . '/../storage/database',
     ],
 
     'admin' => [
