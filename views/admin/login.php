@@ -50,6 +50,9 @@
 
         <p style="text-align:center;font-size:13px;color:var(--text-muted);margin-top:24px;">
             <a href="/" style="color:var(--primary);">← Back to site</a>
+            <?php if ($hasUsers): ?>
+            · <a href="/admin?setup=1" style="color:var(--error);" onclick="return confirm('Reset admin access? This will delete all existing admin accounts so you can set up a new one.');">Reset Admin</a>
+            <?php endif; ?>
         </p>
     </div>
 </body>

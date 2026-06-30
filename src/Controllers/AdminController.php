@@ -22,6 +22,14 @@ class AdminController
                 return;
             }
 
+            // Allow re-setup via ?setup=1 query param
+            if ($request->get('setup') === '1') {
+                $db = Database::getInstance();
+                $db->query("DELETE FROM users");
+                View::redirect('/admin');
+                return;
+            }
+
             $config = require __DIR__ . '/../../config/app.php';
             $db = Database::getInstance();
             $hasUsers = $db->fetch("SELECT COUNT(*) as count FROM users")['count'] > 0;
