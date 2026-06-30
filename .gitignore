@@ -15,6 +15,16 @@ Thumbs.db
 # PHP
 *.log
 
-# Runtime
+# Runtime data (keep structure, ignore actual data)
+storage/database/*.sqlite
+storage/database/*.sqlite-wal
+storage/database/*.sqlite-shm
+storage/media/*
+!storage/media/.gitkeep
+
+# Old admin data files
 admin/blog_posts.json
 admin/admin_data.php
+
+# Environment
+.env

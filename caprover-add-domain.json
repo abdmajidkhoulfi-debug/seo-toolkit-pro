@@ -1,0 +1,9 @@
+{
+  "caproverName": "seo-toolkit",
+  "path": "/user/apps/appDefinitions/addCustomDomain",
+  "method": "POST",
+  "data": {
+    "appName": "seo-toolkit",
+    "customDomain": "pfsrv.com"
+  }
+}

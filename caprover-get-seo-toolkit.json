@@ -1,0 +1,9 @@
+{
+  "caproverName": "seo-toolkit",
+  "path": "/user/apps/appDefinitions",
+  "method": "GET",
+  "data": {
+    "appName": "seo-toolkit"
+  },
+  "output": "seo-toolkit-app.json"
+}

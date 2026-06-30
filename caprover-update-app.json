@@ -1,0 +1,28 @@
+{
+  "caproverName": "seo-toolkit",
+  "path": "/user/apps/appDefinitions/update",
+  "method": "POST",
+  "data": {
+    "appName": "seo-toolkit",
+    "hasPersistentData": false,
+    "isAppUsingVolumes": false,
+    "instanceCount": 1,
+    "notExposeAsWebApp": false,
+    "hasDefaultSubDomainSsl": true,
+    "redirectDomain": "",
+    "forceSsl": true,
+    "websocketSupport": false,
+    "containerHttpPort": 80,
+    "preDeployFunction": "",
+    "envVars": [],
+    "ports": [],
+    "volumes": [],
+    "tags": [],
+    "customDomain": [
+      {
+        "publicDomain": "pfsrv.com",
+        "hasSsl": false
+      }
+    ]
+  }
+}

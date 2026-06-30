@@ -1,0 +1,401 @@
+{
+  "appDefinitions": [
+    {
+      "hasPersistentData": false,
+      "projectId": "",
+      "description": "",
+      "instanceCount": 1,
+      "captainDefinitionRelativeFilePath": "./captain-definition",
+      "networks": [
+        "captain-overlay-network"
+      ],
+      "envVars": [
+        {
+          "key": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "key": "PORT",
+          "value": "3000"
+        },
+        {
+          "key": "DB_HOST",
+          "value": "srv-captain--smartmath-db-db"
+        },
+        {
+          "key": "DB_PORT",
+          "value": "3306"
+        },
+        {
+          "key": "DB_USER",
+          "value": "root"
+        },
+        {
+          "key": "DB_PASSWORD",
+          "value": "joeexemple2000"
+        },
+        {
+          "key": "DB_NAME",
+          "value": "smartmath"
+        },
+        {
+          "key": "JWT_SECRET",
+          "value": "dev_jwt_secret_key_smartmath_2024"
+        },
+        {
+          "key": "JWT_EXPIRES_IN",
+          "value": "7d"
+        },
+        {
+          "key": "FRONTEND_URL",
+          "value": "https://smathai.com"
+        },
+        {
+          "key": "ADMIN_EMAIL",
+          "value": "admin@smartmath.com"
+        },
+        {
+          "key": "ADMIN_PASSWORD",
+          "value": "Admin@123456"
+        },
+        {
+          "key": "UPLOAD_PATH",
+          "value": "uploads"
+        },
+        {
+          "key": "MAX_FILE_SIZE",
+          "value": "5242880"
+        }
+      ],
+      "volumes": [],
+      "ports": [],
+      "tags": [],
+      "versions": [
+        {
+          "version": 0,
+          "timeStamp": "2026-06-21T12:04:57.634Z",
+          "deployedImageName": "caprover/caprover-placeholder-app:latest",
+          "gitHash": ""
+        },
+        {
+          "version": 1,
+          "timeStamp": "2026-06-21T13:08:02.969Z"
+        },
+        {
+          "version": 2,
+          "timeStamp": "2026-06-21T13:12:08.812Z",
+          "deployedImageName": "img-captain-smartmath-api:2",
+          "gitHash": ""
+        },
+        {
+          "version": 3,
+          "timeStamp": "2026-06-21T13:14:27.341Z",
+          "deployedImageName": "img-captain-smartmath-api:3",
+          "gitHash": ""
+        },
+        {
+          "version": 4,
+          "timeStamp": "2026-06-21T13:21:25.491Z",
+          "deployedImageName": "img-captain-smartmath-api:4",
+          "gitHash": ""
+        },
+        {
+          "version": 5,
+          "timeStamp": "2026-06-21T13:26:32.099Z",
+          "deployedImageName": "img-captain-smartmath-api:5",
+          "gitHash": ""
+        },
+        {
+          "version": 6,
+          "timeStamp": "2026-06-21T13:39:41.668Z",
+          "deployedImageName": "img-captain-smartmath-api:6",
+          "gitHash": ""
+        },
+        {
+          "version": 7,
+          "timeStamp": "2026-06-21T13:42:56.169Z",
+          "deployedImageName": "img-captain-smartmath-api:7",
+          "gitHash": ""
+        },
+        {
+          "version": 8,
+          "timeStamp": "2026-06-21T14:01:34.097Z",
+          "deployedImageName": "img-captain-smartmath-api:8",
+          "gitHash": ""
+        },
+        {
+          "version": 9,
+          "timeStamp": "2026-06-21T14:04:19.241Z",
+          "deployedImageName": "img-captain-smartmath-api:9",
+          "gitHash": ""
+        },
+        {
+          "version": 10,
+          "timeStamp": "2026-06-21T14:06:53.169Z",
+          "deployedImageName": "img-captain-smartmath-api:10",
+          "gitHash": ""
+        },
+        {
+          "version": 11,
+          "timeStamp": "2026-06-21T14:09:21.446Z",
+          "deployedImageName": "img-captain-smartmath-api:11",
+          "gitHash": ""
+        }
+      ],
+      "deployedVersion": 11,
+      "notExposeAsWebApp": false,
+      "customDomain": [],
+      "hasDefaultSubDomainSsl": true,
+      "redirectDomain": "",
+      "forceSsl": true,
+      "websocketSupport": false,
+      "containerHttpPort": 3000,
+      "preDeployFunction": "",
+      "serviceUpdateOverride": "",
+      "appDeployTokenConfig": {
+        "enabled": true,
+        "appDeployToken": "901ca2ee0d19df4917c96faf4e1db6d5f2530e057c1af9a4c069ede78829f9a0"
+      },
+      "appName": "smartmath-api",
+      "isAppBuilding": false
+    },
+    {
+      "hasPersistentData": false,
+      "projectId": "",
+      "description": "",
+      "instanceCount": 1,
+      "captainDefinitionRelativeFilePath": "./captain-definition",
+      "networks": [
+        "captain-overlay-network"
+      ],
+      "envVars": [
+        {
+          "key": "VITE_API_URL",
+          "value": "https://smartmath-api.smathai.com"
+        }
+      ],
+      "volumes": [],
+      "ports": [],
+      "tags": [],
+      "versions": [
+        {
+          "version": 0,
+          "timeStamp": "2026-06-21T12:05:20.690Z",
+          "deployedImageName": "caprover/caprover-placeholder-app:latest",
+          "gitHash": ""
+        },
+        {
+          "version": 1,
+          "timeStamp": "2026-06-21T13:08:23.209Z"
+        },
+        {
+          "version": 2,
+          "timeStamp": "2026-06-21T13:12:54.611Z",
+          "deployedImageName": "img-captain-smartmath-frontend:2",
+          "gitHash": ""
+        },
+        {
+          "version": 3,
+          "timeStamp": "2026-06-21T13:14:48.663Z",
+          "deployedImageName": "img-captain-smartmath-frontend:3",
+          "gitHash": ""
+        },
+        {
+          "version": 4,
+          "timeStamp": "2026-06-21T13:22:07.562Z",
+          "deployedImageName": "img-captain-smartmath-frontend:4",
+          "gitHash": ""
+        },
+        {
+          "version": 5,
+          "timeStamp": "2026-06-21T13:24:24.414Z"
+        },
+        {
+          "version": 6,
+          "timeStamp": "2026-06-21T13:26:53.422Z",
+          "deployedImageName": "img-captain-smartmath-frontend:6",
+          "gitHash": ""
+        },
+        {
+          "version": 7,
+          "timeStamp": "2026-06-21T13:40:00.307Z",
+          "deployedImageName": "img-captain-smartmath-frontend:7",
+          "gitHash": ""
+        },
+        {
+          "version": 8,
+          "timeStamp": "2026-06-21T13:43:20.417Z",
+          "deployedImageName": "img-captain-smartmath-frontend:8",
+          "gitHash": ""
+        },
+        {
+          "version": 9,
+          "timeStamp": "2026-06-21T13:45:12.343Z",
+          "deployedImageName": "img-captain-smartmath-frontend:9",
+          "gitHash": ""
+        },
+        {
+          "version": 10,
+          "timeStamp": "2026-06-21T14:01:55.238Z",
+          "deployedImageName": "img-captain-smartmath-frontend:10",
+          "gitHash": ""
+        },
+        {
+          "version": 11,
+          "timeStamp": "2026-06-21T14:04:39.290Z",
+          "deployedImageName": "img-captain-smartmath-frontend:11",
+          "gitHash": ""
+        },
+        {
+          "version": 12,
+          "timeStamp": "2026-06-21T14:07:16.374Z",
+          "deployedImageName": "img-captain-smartmath-frontend:12",
+          "gitHash": ""
+        },
+        {
+          "version": 13,
+          "timeStamp": "2026-06-21T14:09:46.193Z",
+          "deployedImageName": "img-captain-smartmath-frontend:13",
+          "gitHash": ""
+        }
+      ],
+      "deployedVersion": 13,
+      "notExposeAsWebApp": false,
+      "customDomain": [
+        {
+          "publicDomain": "smathai.com",
+          "hasSsl": true
+        }
+      ],
+      "hasDefaultSubDomainSsl": true,
+      "redirectDomain": "",
+      "forceSsl": true,
+      "websocketSupport": false,
+      "containerHttpPort": 3000,
+      "preDeployFunction": "",
+      "serviceUpdateOverride": "",
+      "appDeployTokenConfig": {
+        "enabled": true,
+        "appDeployToken": "b203d9bdafd46b5a6290ca7176770612c36faa8d2e8434c229f8e2bf5dbb5c89"
+      },
+      "appName": "smartmath-frontend",
+      "isAppBuilding": false
+    },
+    {
+      "hasPersistentData": true,
+      "projectId": "",
+      "description": "",
+      "instanceCount": 1,
+      "captainDefinitionRelativeFilePath": "./captain-definition",
+      "networks": [
+        "captain-overlay-network"
+      ],
+      "envVars": [
+        {
+          "key": "MYSQL_ROOT_PASSWORD",
+          "value": "joeexemple2000"
+        },
+        {
+          "key": "MYSQL_DATABASE",
+          "value": "smartmath"
+        },
+        {
+          "key": "MYSQL_USER",
+          "value": "smartmath"
+        },
+        {
+          "key": "MYSQL_PASSWORD",
+          "value": "joeexemple2000"
+        }
+      ],
+      "volumes": [
+        {
+          "containerPath": "/var/lib/mysql",
+          "volumeName": "smartmath-db-db-data"
+        }
+      ],
+      "ports": [],
+      "tags": [
+        {
+          "tagName": "smartmath-db"
+        }
+      ],
+      "versions": [
+        {
+          "version": 0,
+          "timeStamp": "2026-06-21T12:05:58.192Z",
+          "deployedImageName": "caprover/caprover-placeholder-app:latest",
+          "gitHash": ""
+        },
+        {
+          "version": 1,
+          "timeStamp": "2026-06-21T12:06:04.790Z",
+          "deployedImageName": "img-captain-smartmath-db-db:1",
+          "gitHash": ""
+        }
+      ],
+      "deployedVersion": 1,
+      "notExposeAsWebApp": true,
+      "customDomain": [],
+      "hasDefaultSubDomainSsl": false,
+      "redirectDomain": "",
+      "forceSsl": false,
+      "websocketSupport": false,
+      "containerHttpPort": 80,
+      "nodeId": "plk091mmmnph1anbpwvotrigs",
+      "preDeployFunction": "",
+      "serviceUpdateOverride": "",
+      "appDeployTokenConfig": {
+        "enabled": false
+      },
+      "appName": "smartmath-db-db",
+      "isAppBuilding": false
+    },
+    {
+      "hasPersistentData": false,
+      "projectId": "",
+      "description": "",
+      "instanceCount": 1,
+      "captainDefinitionRelativeFilePath": "./captain-definition",
+      "networks": [
+        "captain-overlay-network"
+      ],
+      "envVars": [],
+      "volumes": [],
+      "ports": [],
+      "tags": [],
+      "versions": [
+        {
+          "version": 0,
+          "timeStamp": "2026-06-29T10:42:35.493Z",
+          "deployedImageName": "caprover/caprover-placeholder-app:latest",
+          "gitHash": ""
+        },
+        {
+          "version": 1,
+          "timeStamp": "2026-06-29T10:43:10.380Z",
+          "deployedImageName": "img-captain-seo-toolkit:1",
+          "gitHash": "6e99f9d6b893150c732dd407c500861342e0db1f"
+        }
+      ],
+      "deployedVersion": 1,
+      "notExposeAsWebApp": false,
+      "customDomain": [],
+      "hasDefaultSubDomainSsl": true,
+      "redirectDomain": "",
+      "forceSsl": true,
+      "websocketSupport": false,
+      "containerHttpPort": 80,
+      "preDeployFunction": "",
+      "serviceUpdateOverride": "",
+      "appDeployTokenConfig": {
+        "enabled": false
+      },
+      "appName": "seo-toolkit",
+      "isAppBuilding": false
+    }
+  ],
+  "rootDomain": "smathai.com",
+  "captainSubDomain": "captain",
+  "defaultNginxConfig": "<%\nif (s.forceSsl) {\n%>\n    server {\n\n        listen       80;\n\n        server_name  <%-s.publicDomain%>;\n\n        # Used by Lets Encrypt\n        location /.well-known/acme-challenge/ {\n            root <%-s.staticWebRoot%>;\n        }\n\n        # Used by CapRover for health check\n        location /.well-known/captain-identifier {\n            root <%-s.staticWebRoot%>;\n        }\n\n        location / {\n            return 302 https://$http_host$request_uri;\n        }\n    }\n<%\n}\n%>\n\n\nserver {\n\n    <%\n    if (!s.forceSsl) {\n    %>\n        listen       80;\n    <%\n    }\n    if (s.hasSsl) {\n    %>\n        listen              443 ssl;\n        http2               on;\n        ssl_certificate     <%-s.crtPath%>;\n        ssl_certificate_key <%-s.keyPath%>;\n    <%\n    }\n    if (s.logAccessPath) {\n    %>\n        access_log <%-s.logAccessPath%>;\n    <%\n    }\n    %>\n\n        client_max_body_size 500m;\n\n        server_name  <%-s.publicDomain%>;\n\n        # 127.0.0.11 is DNS set up by Docker, see:\n        # https://docs.docker.com/engine/userguide/networking/configure-dns/\n        # https://github.com/moby/moby/issues/20026\n        resolver 127.0.0.11 valid=10s;\n        # IMPORTANT!! If you are here from an old thread to set a custom port, you do not need to modify this port manually here!!\n        # Simply change the Container HTTP Port from the dashboard HTTP panel\n        set $upstream http://<%-s.localDomain%>:<%-s.containerHttpPort%>;\n\n        location / {\n\n\n\t<%\n\tif (s.redirectToPath) {\n\t%>\n\t    return 302 <%-s.redirectToPath%>$request_uri;\n\t<%\n\t} else {\n\t%>\n\n\t\t    <%\n\t\t    if (s.httpBasicAuthPath) {\n\t\t    %>\n\t\t\t    auth_basic           \"Restricted Access\";\n\t\t\t    auth_basic_user_file <%-s.httpBasicAuthPath%>; \n\t\t    <%\n\t\t    }\n\t\t    %>\n\n\t\t\t    proxy_pass $upstream;\n\t\t\t    proxy_set_header Host $host;\n\t\t\t    proxy_set_header X-Real-IP $remote_addr;\n\t\t\t    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n\t\t\t    proxy_set_header X-Forwarded-Proto $scheme;\n\n\t\t    <%\n\t\t    if (s.websocketSupport) {\n\t\t    %>\n\t\t\t    proxy_set_header Upgrade $http_upgrade;\n\t\t\t    proxy_set_header Connection \"upgrade\";\n\t\t\t    proxy_http_version 1.1;\n\t\t    <%\n\t\t    }\n\t\t    %>\n    \n    \n\t<%\n\t}\n\t%>\n\t\n        }\n\n        # Used by Lets Encrypt\n        location /.well-known/acme-challenge/ {\n            root <%-s.staticWebRoot%>;\n        }\n        \n        # Used by CapRover for health check\n        location /.well-known/captain-identifier {\n            root <%-s.staticWebRoot%>;\n        }\n\n        error_page 502 /captain_502_custom_error_page.html;\n        location = /captain_502_custom_error_page.html {\n                root <%-s.customErrorPagesDirectory%>;\n                internal;\n        }\n}\n"
+}
