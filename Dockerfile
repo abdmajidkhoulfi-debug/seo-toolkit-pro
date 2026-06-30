@@ -25,13 +25,13 @@ RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/apache2.conf
 # Enable .htaccess
 RUN sed -i '/<Directory \/var\/www\/html>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
-# Set proper permissions
+# Run migrations (creates database file)
+RUN php /var/www/html/migrations/migrate.php
+
+# Set proper permissions (AFTER migration so www-data owns the db file)
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html \
     && chmod -R 775 /var/www/html/storage
-
-# Run migrations
-RUN php /var/www/html/migrations/migrate.php
 
 # Expose port 80
 EXPOSE 80
